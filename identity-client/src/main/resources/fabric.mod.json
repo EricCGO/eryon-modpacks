@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "eryon_identity",
+  "version": "${version}",
+  "name": "Eryon Identity",
+  "description": "Identidad visual Eryon para Fabric 1.21.1.",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "app.eryon.identity.client.EryonIdentityClient"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "eryon-identity-client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": ">=0.116.0",
+    "minecraft": "1.21.1",
+    "java": ">=21"
+  }
+}

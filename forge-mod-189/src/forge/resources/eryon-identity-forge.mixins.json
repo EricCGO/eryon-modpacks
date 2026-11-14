@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "app.eryon.identity.forge.mixins",
+  "refmap": "eryon-identity-forge.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "FMLBrandingMixin",
+    "MinecraftSplashMixin",
+    "LoadingScreenRendererMixin",
+    "GuiScreenAccessor",
+    "GuiMainMenuMixin",
+    "GuiSlotMixin",
+    "GuiScreenBackgroundMixin",
+    "GuiPlayerTabOverlayMixin",
+    "RendererLivingEntityMixin",
+    "RenderMixin"
+  ]
+}

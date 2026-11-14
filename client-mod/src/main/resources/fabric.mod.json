@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "eryon_identity",
+  "version": "${version}",
+  "name": "ERYON Identity",
+  "description": "Muestra la identidad ERYON en TAB y sobre los jugadores en Minecraft 1.20.1.",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "app.eryon.badge.EryonIdentityClient"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "eryon-identity-client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "1.20.1",
+    "java": ">=17"
+  }
+}

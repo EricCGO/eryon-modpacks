@@ -1,0 +1,234 @@
+
+.eryon-update-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  place-items: center;
+  overflow: hidden;
+  padding: 24px;
+  box-sizing: border-box;
+  background: rgba(5, 10, 7, 0.72);
+  backdrop-filter: blur(12px);
+}
+
+.eryon-update-modal {
+  width: 100%;
+  max-width: 440px;
+  max-height: calc(100dvh - 56px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 30px;
+  color: #f3f7f3;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(85, 214, 107, 0.14),
+      transparent 42%
+    ),
+    linear-gradient(135deg, #101a12 0%, #0d120f 100%);
+  border: 1px solid rgba(85, 214, 107, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 22px 80px rgba(0, 0, 0, 0.5);
+  font-family: inherit;
+}
+
+.eryon-update-modal:has(.eryon-update-brand.minimal) {
+  max-width: 280px;
+  padding: 28px;
+}
+
+.eryon-update-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+
+.eryon-update-brand.minimal {
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.eryon-update-copy,
+.update-error-message {
+  display: none;
+}
+
+.eryon-update-logo {
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  display: block;
+  object-fit: contain;
+  border-radius: 15px;
+  border: 1px solid rgba(139, 255, 153, 0.45);
+  background: #0b160e;
+  box-shadow: 0 7px 24px rgba(64, 202, 85, 0.2);
+}
+
+.eryon-update-brand.minimal .eryon-update-logo {
+  width: 112px;
+  height: 112px;
+  flex-basis: 112px;
+  border-radius: 24px;
+}
+
+.eryon-update-eyebrow {
+  margin: 0 0 5px;
+  color: #78d870;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.eryon-update-brand h2 {
+  margin: 0;
+  color: #f3f7f3;
+  font-size: 21px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+.eryon-update-description {
+  margin: 0 0 22px;
+  color: #a9b8aa;
+  font-size: 13px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.eryon-update-version {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding: 13px 15px;
+  background: rgba(85, 214, 107, 0.05);
+  border: 1px solid rgba(85, 214, 107, 0.15);
+  border-radius: 11px;
+}
+
+.eryon-update-version span {
+  color: #9aa99d;
+  font-size: 12px;
+}
+
+.eryon-update-version strong {
+  color: #d9f8dd;
+  font-size: 13px;
+}
+
+.eryon-update-progress-section {
+  margin: 6px 0 22px;
+}
+
+.eryon-update-percent {
+  display: block;
+  margin-top: 9px;
+  color: #9ff1a6;
+  font-size: 12px;
+  text-align: center;
+}
+
+.visually-hidden {
+  display: none;
+}
+
+.eryon-update-progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: #a9b8aa;
+  font-size: 11px;
+}
+
+.eryon-update-progress-label strong {
+  color: #9ff1a6;
+  font-variant-numeric: tabular-nums;
+}
+
+.eryon-update-progress-track {
+  height: 7px;
+  overflow: hidden;
+  background: #1b2b1d;
+  border-radius: 999px;
+  border: 1px solid rgba(85, 214, 107, 0.12);
+}
+
+.eryon-update-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3fb85c, #76ee89);
+  border-radius: inherit;
+  transition: width 180ms ease;
+}
+
+.eryon-update-progress-fill.is-complete {
+  background: linear-gradient(90deg, #55d66b, #99ff9d);
+}
+
+.eryon-update-button {
+  width: 100%;
+  min-height: 45px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 11px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  transition:
+    transform 150ms ease,
+    filter 150ms ease,
+    background 150ms ease;
+}
+
+.eryon-update-button:hover:not(:disabled) {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+.eryon-update-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.eryon-update-button.primary {
+  color: #071009;
+  background: linear-gradient(135deg, #76ee89, #48ba60);
+  box-shadow: 0 10px 24px rgba(64, 202, 85, 0.18);
+}
+
+.eryon-update-button.secondary {
+  color: #edf6ee;
+  background: #1a2b1d;
+  border: 1px solid rgba(85, 214, 107, 0.18);
+}
+
+.eryon-update-footnote {
+  margin: 0;
+  color: #829186;
+  font-size: 11px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .eryon-update-modal {
+    padding: 23px;
+    max-height: calc(100dvh - 36px);
+  }
+
+  .eryon-update-overlay {
+    padding: 16px 16px 20px;
+  }
+
+  .eryon-update-brand h2 {
+    font-size: 18px;
+  }
+}

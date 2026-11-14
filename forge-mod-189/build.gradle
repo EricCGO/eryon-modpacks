@@ -1,0 +1,175 @@
+// =====================================================
+// ERYON Identity — Forge 1.8.9 (cliente)
+// =====================================================
+// Port del identificador Eryon a Forge legacy. Compila con
+// Unimined (toolchain moderna Gradle 8.x + JDK para el daemon,
+// bytecode Java 8), que es lo que usa Unimined en sus proyectos
+// de prueba oficiales para 1.8.9-Forge.
+//
+// Mapeos: MCP "stable 22-1.8.9" (nombres de desarrollador) sobre
+// searge, la cadena estandar para MODS Forge 1.8.9 de produccion.
+// El jar final (remapJar) queda con nombres SRG para Forge real.
+
+plugins {
+    id "java"
+    id "xyz.wagyourtail.unimined" version "1.4.1"
+}
+
+group "app.eryon"
+version "1.0.0"
+
+base {
+    archivesName = "eryon-identity-forge-1.8.9"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 8
+    options.encoding = "UTF-8"
+}
+
+sourceSets {
+    forge {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
+// Reutiliza el mismo distintivo bitmap del cliente moderno en el JAR legacy.
+tasks.named("processForgeResources") {
+    from("../client-mod/src/main/resources/assets/eryon/textures/font/badge.png") {
+        into "assets/eryon/textures"
+        rename { "badge.png" }
+    }
+}
+
+repositories {
+    maven {
+        name = "wagyourtail releases"
+        url = "https://maven.wagyourtail.xyz/releases"
+    }
+    maven {
+        name = "sponge"
+        url = "https://repo.spongepowered.org/maven"
+    }
+    mavenCentral()
+}
+
+unimined.minecraft {
+    version = "1.8.9"
+
+    mappings {
+        searge()
+        mcp("stable", "22-1.8.9")
+    }
+
+    defaultRemapJar = false
+}
+
+unimined.minecraft(sourceSets.forge) {
+    combineWith(sourceSets.main)
+
+    minecraftForge {
+        loader "11.15.1.2318-1.8.9"
+        mixinConfig "eryon-identity-forge.mixins.json"
+    }
+
+    defaultRemapJar = true
+}
+
+// Config resolvable para extraer las clases que van dentro del
+// jar final (Mixin runtime shaded).
+configurations {
+    forgeShade {
+        canBeConsumed = false
+        canBeResolved = true
+        extendsFrom forgeImplementation
+    }
+}
+
+dependencies {
+    // Mixin para compilar (annotations + bootstrap de legacy) y
+    // para fusionar en el jar final.
+    forgeImplementation "org.spongepowered:mixin:0.7.11-SNAPSHOT"
+}
+
+jar {
+    enabled = false
+}
+
+// Jar base del flavor forge con el manifiesto coremod que FML
+// 1.8.9 usa para detectar que este jar debe inicializar Mixin.
+tasks.named("forgeJar") {
+    manifest {
+        attributes(
+            "FMLCorePlugin": "app.eryon.identity.forge.EryonMixinLoader",
+            "FMLCorePluginContainsFMLMod": true,
+            "ForceLoadAsMod": true,
+            "ModSide": "CLIENT",
+            "TweakOrder": 0
+        )
+    }
+}
+
+// El jar de produccion con nombres SRG no lleva las clases de
+// Mixin (solo se compilan); las fusionamos dentro del jar final
+// para que el coremod pueda bootstrapear su runtime sin pedir
+// nada extra al usuario.
+// Depuracion temporal: nombres de tasks generados por unimined
+afterEvaluate {
+    println "== TASKS ==" + project.tasks.names.sort().findAll {
+        it?.contains("Jar") || it?.contains("Remap") || it?.contains("remap")
+    }
+}
+
+tasks.register("fatLauncherJar", Jar) {
+    dependsOn tasks.named("remapForgeJar")
+    archiveFileName = "eryon-identity-forge-1.8.9.jar"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from(zipTree(tasks.named("remapForgeJar").flatMap { it.archiveFile }))
+    configurations.forgeShade.resolvedConfiguration.resolvedArtifacts.each { artifact ->
+        from(zipTree(artifact.file)) {
+            exclude "com/**"
+            exclude "net/**"
+            exclude "META-INF/**"
+            exclude "LICENSE*"
+            exclude "org/spongepowered/asm/agent/**"
+        }
+
+        // Mixin descubre su servicio para LaunchWrapper mediante estos
+        // descriptores. Excluir META-INF completo hace que bootstrap falle
+        // en Forge 1.8.9 aunque las clases de Mixin estén dentro del JAR.
+        from(zipTree(artifact.file)) {
+            include "META-INF/services/**"
+        }
+    }
+
+    manifest {
+        attributes(
+            "FMLCorePlugin": "app.eryon.identity.forge.EryonMixinLoader",
+            "FMLCorePluginContainsFMLMod": true,
+            "ForceLoadAsMod": true,
+            "ModSide": "CLIENT",
+            "TweakOrder": 0
+        )
+    }
+}
+
+tasks.register("copyLauncherMod", Copy) {
+    dependsOn tasks.named("fatLauncherJar")
+    from(tasks.named("fatLauncherJar").flatMap { it.archiveFile })
+    into(new File(rootProject.projectDir.parentFile, "build"))
+    rename { "eryon-identity-forge-1.8.9.jar" }
+}
+
+tasks.named("build") {
+    finalizedBy "copyLauncherMod"
+}
+

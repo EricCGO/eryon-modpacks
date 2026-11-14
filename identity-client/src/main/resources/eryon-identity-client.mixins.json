@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "app.eryon.identity.client.mixin",
+  "refmap": "eryon-identity-client-refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "PlayerListHudMixin",
+    "EntityRendererMixin",
+    "EryonScreenStyleMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

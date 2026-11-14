@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "eryon_identity_server",
+  "version": "${version}",
+  "name": "Eryon Identity Server",
+  "description": "Registra y sincroniza los clientes Eryon compatibles.",
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "app.eryon.identity.server.EryonIdentityServer"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": ">=0.116.0",
+    "minecraft": "1.21.1",
+    "java": ">=21"
+  }
+}

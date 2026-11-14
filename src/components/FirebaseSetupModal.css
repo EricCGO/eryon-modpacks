@@ -1,0 +1,90 @@
+
+/* =====================================================
+   MODAL DE CONFIGURACIÓN DE FIREBASE
+===================================================== */
+
+.firebase-setup-modal {
+  max-width: 680px;
+}
+
+.firebase-paste-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.firebase-paste-form .settings-textarea {
+  min-height: 150px;
+  font-family: Consolas, monospace;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.firebase-paste-form .secondary-button {
+  align-self: flex-start;
+}
+
+.firebase-setup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.firebase-setup-form .instance-settings-field {
+  margin-bottom: 0;
+}
+
+.firebase-setup-form code {
+  padding: 1px 6px;
+
+  border: 1px solid #304234;
+  border-radius: 5px;
+
+  background: rgba(85, 214, 107, 0.07);
+  color: #8eee9d;
+
+  font-size: 10px;
+}
+
+.firebase-rules {
+  margin-top: 15px;
+  padding: 12px 13px;
+
+  border: 1px solid #304234;
+  border-radius: 9px;
+
+  background: rgba(5, 12, 6, 0.48);
+}
+
+.firebase-rules summary {
+  color: #c7d4c9;
+  cursor: pointer;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.firebase-rules pre {
+  margin: 11px 0;
+  padding: 11px;
+
+  overflow-x: auto;
+
+  border: 1px solid #2b392e;
+  border-radius: 7px;
+
+  background: rgba(3, 8, 4, 0.75);
+  color: #9fe8ab;
+
+  font-family: Consolas, monospace;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.firebase-rules p {
+  margin: 0;
+
+  color: #a2b0a4;
+  font-size: 10px;
+  line-height: 1.7;
+}

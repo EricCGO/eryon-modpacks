@@ -1,0 +1,11 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "eryon:font/badge.png",
+      "ascent": 12,
+      "height": 14,
+      "chars": ["\uE000"]
+    }
+  ]
+}

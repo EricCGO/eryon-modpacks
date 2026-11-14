@@ -1,0 +1,14 @@
+# Backend de eventos del launcher ERYON.
+# Despliegue: npx wrangler deploy --config cloudflare/events/wrangler.toml
+# Autorizacion admin: npx wrangler secret put ADMIN_TOKEN --config cloudflare/events/wrangler.toml
+name = "eryon-events"
+main = "events-worker.js"
+compatibility_date = "2026-11-12"
+
+[[kv_namespaces]]
+binding = "EVENTS_DATA"
+id = "50ee406cceec4b258e72acd9ecc1dac3"
+
+[[kv_namespaces]]
+binding = "EVENTS_IMG"
+id = "a5a79f01dda54eed95efd62d1bd8afa7"

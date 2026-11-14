@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "app.eryon.menuhelper.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "SobreviveMainMenuMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

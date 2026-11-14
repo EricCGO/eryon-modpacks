@@ -1,0 +1,638 @@
+
+.launcher-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-width: 0;
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.launcher-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 250px;
+  padding: 32px;
+  overflow: hidden;
+  border: 1px solid var(--border, #29372c);
+  border-radius: 16px;
+  background:
+    radial-gradient(ellipse at 85% 50%, #114b25 0%, transparent 42%),
+    linear-gradient(125deg, rgba(18, 31, 20, 0.96), rgba(12, 21, 14, 0.9) 65%);
+}
+
+.launcher-hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+}
+
+.launcher-hero h1 {
+  margin: 16px 0;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -1px;
+}
+
+.launcher-hero h1 span {
+  color: #55e326;
+}
+
+.launcher-hero p {
+  max-width: 480px;
+  color: var(--muted, #9aa99d);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.launcher-emblem {
+  display: grid;
+  flex-shrink: 0;
+  width: 150px;
+  height: 150px;
+  margin: 20px;
+  place-items: center;
+  border: 2px solid #35dd0b;
+  border-radius: 50%;
+  color: #55e326;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 100px;
+  font-weight: 900;
+  box-shadow:
+    0 0 60px #35dd0b20,
+    inset 0 0 35px #35dd0b10;
+}
+
+.launcher-main-logo {
+  flex-shrink: 0;
+  width: 150px;
+  height: 150px;
+  margin: 20px;
+  border-radius: 30px;
+  font-size: 100px;
+  box-shadow: 0 0 60px rgba(64, 202, 85, 0.2);
+}
+
+.launcher-hero-logo {
+  display: block;
+  flex-shrink: 0;
+  width: 260px;
+  height: 260px;
+  margin: -5px 42px -5px 10px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 28px rgba(85, 214, 107, 0.2));
+}
+
+/* =====================================================
+   PANEL PRINCIPAL
+===================================================== */
+
+.launcher-install-panel {
+  min-width: 0;
+  padding: 26px;
+  border: 1px solid var(--border, #29372c);
+  border-radius: 14px;
+  background: var(--panel-background, rgba(17, 24, 19, 0.88));
+  box-shadow: var(--shadow, 0 18px 50px rgba(0, 0, 0, 0.3));
+}
+
+.launcher-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+}
+
+.launcher-panel-heading h2 {
+  margin: 7px 0 0;
+  font-size: 24px;
+}
+
+.launcher-pill {
+  flex-shrink: 0;
+  padding: 7px 11px;
+  border: 1px solid var(--green-border, rgba(85, 214, 107, 0.28));
+  border-radius: 6px;
+  background: var(--green-soft, rgba(85, 214, 107, 0.09));
+  color: var(--accent-color, #55d66b);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* =====================================================
+   SELECTORES Y CAMPOS
+===================================================== */
+
+.launcher-install-panel .field-label {
+  display: block;
+  margin: 18px 0 9px;
+  color: var(--muted, #9aa99d);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.launcher-install-panel .text-input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 12px 14px;
+  border: 1px solid var(--border, #29372c);
+  border-radius: 8px;
+  outline: none;
+  background-color: rgba(8, 15, 9, 0.68);
+  color: var(--text, #f3f7f3);
+  font: inherit;
+  font-size: 13px;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.launcher-install-panel select.text-input {
+  cursor: pointer;
+}
+
+.launcher-install-panel .text-input:hover:not(:disabled) {
+  border-color: var(--border-hover, #426c49);
+}
+
+.launcher-install-panel .text-input:focus-visible {
+  border-color: var(--accent-color, #55d66b);
+  box-shadow: 0 0 0 3px rgba(85, 214, 107, 0.12);
+}
+
+.launcher-install-panel .text-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.launcher-install-panel select.text-input option {
+  background: #101b12;
+  color: var(--text, #f3f7f3);
+}
+
+/* =====================================================
+   TARJETA DE PERFIL
+===================================================== */
+
+.launcher-profile-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  margin: 18px 0 22px;
+  padding: 18px;
+  border: 1px solid var(--border, #29372c);
+  border-radius: 10px;
+  background:
+    linear-gradient(135deg, rgba(21, 31, 23, 0.94), rgba(13, 22, 15, 0.9));
+}
+
+.launcher-profile-card > .field-label:first-child {
+  margin-top: 0;
+}
+
+.launcher-profile-card .field-hint {
+  margin: 4px 0 0;
+}
+
+.launcher-profile-card .launcher-info-row {
+  padding: 12px 0;
+}
+
+.launcher-profile-card .launcher-info-row:first-child {
+  padding-top: 2px;
+}
+
+.launcher-profile-card .launcher-info-row:last-of-type {
+  border-bottom: 0;
+}
+
+/* Mensajes y texto auxiliar */
+
+.launcher-install-panel .field-hint {
+  color: #92929d;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.launcher-install-panel .feedback-message {
+  margin: 8px 0;
+  color: #9bff88;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   FILAS INFORMATIVAS
+===================================================== */
+
+.launcher-info-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 0;
+  border-bottom: 1px solid #29292f;
+  color: #b1b1ba;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.launcher-info-row span:last-child,
+.launcher-info-row strong {
+  max-width: 65%;
+  color: #f4f4f6;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.launcher-info-row strong {
+  font-weight: 700;
+}
+
+/* =====================================================
+   BOTÓN PRINCIPAL DE INSTALAR Y JUGAR
+===================================================== */
+
+.launcher-play-button {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 62px;
+  margin-top: 24px;
+  padding: 13px 18px;
+  overflow: hidden;
+  border: 1px solid #268d1e;
+  border-radius: 9px;
+  background: linear-gradient(115deg, #18a927, #141414);
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    filter 180ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.launcher-play-button:not(:disabled):hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+
+.launcher-play-button:not(:disabled):active {
+  transform: translateY(0);
+}
+
+.launcher-play-button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+.launcher-play-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+/* =====================================================
+   BARRA DE PROGRESO
+===================================================== */
+
+.button-progress-fill {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  border-right: 1px solid #70ff79;
+  background: linear-gradient(
+    90deg,
+    #176c08,
+    #079d32 70%,
+    #01bd70
+  );
+  transition: width 220ms ease;
+}
+
+.launcher-play-button.is-downloading {
+  border-color: #267b25;
+  background: #153613;
+}
+
+.button-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+
+.button-main-label {
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.button-progress-details {
+  max-width: 100%;
+  color: #e2ffe5;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+  overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   ESTADO DEL LANZADOR
+===================================================== */
+
+.launcher-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+  color: #b8b8c1;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.launcher-status-dot {
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: #58c789;
+}
+
+.launcher-status-dot.busy {
+  background: #37d21b;
+  box-shadow: 0 0 12px #02581380;
+  animation: launcher-pulse 1.3s ease-in-out infinite;
+}
+
+@keyframes launcher-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* =====================================================
+   ERRORES
+===================================================== */
+
+.launcher-error {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid #6b2931;
+  border-radius: 8px;
+  background: #281317;
+  color: #ffb4bb;
+  overflow-wrap: anywhere;
+}
+
+.launcher-error strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.launcher-error p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   REGISTROS TÉCNICOS
+===================================================== */
+
+.launcher-logs {
+  margin-top: 16px;
+  color: #aaa6ad;
+  font-size: 12px;
+}
+
+.launcher-logs summary {
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.launcher-logs summary:focus-visible {
+  outline: 2px solid #55e326;
+  outline-offset: 3px;
+}
+
+.launcher-logs > div {
+  max-height: 180px;
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid #26262c;
+  border-radius: 8px;
+  background: #0b0b0d;
+}
+
+.launcher-logs p {
+  margin: 5px 0;
+  color: #c5c5ce;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* =====================================================
+   AVISO FINAL
+===================================================== */
+
+.launcher-disclaimer {
+  margin: 0;
+  color: #85858f;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* =====================================================
+   RESPONSIVE — TABLETAS Y MÓVILES
+===================================================== */
+
+@media (max-width: 760px) {
+  .launcher-page {
+    gap: 18px;
+  }
+
+  .launcher-hero {
+    min-height: auto;
+    padding: 24px;
+  }
+
+  .launcher-hero-copy {
+    max-width: 100%;
+  }
+
+  .launcher-emblem {
+    width: 75px;
+    height: 75px;
+    margin: 0 0 0 12px;
+    font-size: 50px;
+  }
+
+  .launcher-main-logo {
+    width: 75px;
+    height: 75px;
+    margin: 0 0 0 12px;
+    border-radius: 18px;
+    font-size: 50px;
+  }
+
+  .launcher-hero-logo {
+    width: 100px;
+    height: 100px;
+    margin: 0 0 0 12px;
+  }
+
+  .launcher-hero h1 {
+    font-size: 42px;
+  }
+
+  .launcher-install-panel {
+    padding: 20px;
+  }
+
+  .launcher-profile-card {
+    padding: 15px;
+  }
+
+  .launcher-info-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .launcher-info-row span:last-child,
+  .launcher-info-row strong {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .button-main-label {
+    font-size: 12px;
+  }
+
+  .button-progress-details {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 420px) {
+  .launcher-hero {
+    padding: 18px;
+  }
+
+  .launcher-hero h1 {
+    font-size: 36px;
+  }
+
+  .launcher-hero p {
+    font-size: 13px;
+  }
+
+  .launcher-emblem {
+    width: 54px;
+    height: 54px;
+    margin-left: 8px;
+    font-size: 36px;
+  }
+
+  .launcher-main-logo {
+    width: 54px;
+    height: 54px;
+    margin-left: 8px;
+    border-radius: 14px;
+    font-size: 36px;
+  }
+
+  .launcher-hero-logo {
+    width: 68px;
+    height: 68px;
+    margin-left: 8px;
+  }
+
+  .launcher-install-panel {
+    padding: 16px;
+  }
+
+  .launcher-panel-heading {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .launcher-panel-heading h2 {
+    font-size: 21px;
+  }
+
+  .launcher-pill {
+    padding: 6px 8px;
+    font-size: 9px;
+  }
+
+  .launcher-profile-card {
+    padding: 12px;
+  }
+
+  .launcher-play-button {
+    padding: 12px;
+  }
+}
+
+/* =====================================================
+   ACCESIBILIDAD — MOVIMIENTO REDUCIDO
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .launcher-status-dot.busy {
+    animation: none;
+  }
+
+  .launcher-play-button,
+  .button-progress-fill,
+  .launcher-install-panel .text-input {
+    transition: none;
+  }
+}

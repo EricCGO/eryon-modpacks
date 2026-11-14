@@ -1,0 +1,116 @@
+{
+  "name": "eryon-launcher",
+  "version": "1.3.18",
+  "private": true,
+  "description": "Eryon Launcher - Minecraft con mods",
+  "author": "Eryon",
+  "main": "electron/main.cjs",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && electron .\"",
+    "build": "npm run build:identity:1.20.1 && npm run build:identity && npm run build:identity:forge189 && vite build --base=./",
+    "build:identity:1.20.1": "node scripts/build-identity-1201-mod.cjs",
+    "build:identity": "node scripts/build-identity-mods.cjs",
+    "build:identity:forge189": "node scripts/build-identity-forge-189.cjs",
+    "start": "electron .",
+    "dist": "npm run build && electron-builder --win --config.electronDist=node_modules/electron/dist",
+    "dist:nsis": "npm run build && electron-builder --win nsis --config.electronDist=node_modules/electron/dist",
+    "dist:portable": "npm run build && electron-builder --win portable --config.electronDist=node_modules/electron/dist",
+    "release": "npm run release:github",
+    "release:github": "node scripts/release-github.cjs"
+  },
+  "dependencies": {
+    "discord-rpc": "^4.0.1",
+    "electron-updater": "^6.8.9",
+    "extract-zip": "^2.0.1",
+    "minecraft-launcher-core": "^3.18.1",
+    "msmc": "^5.0.5",
+    "yazl": "^3.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@vitejs/plugin-react": "latest",
+    "concurrently": "latest",
+    "electron": "latest",
+    "electron-builder": "^26.15.3",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "firebase": "^13.2.0",
+    "globals": "^15.15.0",
+    "motion": "^14.3.0",
+    "png-to-ico": "^3.0.2",
+    "react": "latest",
+    "react-dom": "latest",
+    "sharp": "^0.35.5",
+    "skinview3d": "^3.4.2",
+    "vite": "latest",
+    "wait-on": "latest"
+  },
+  "build": {
+    "appId": "com.eryon.launcher",
+    "productName": "Eryon Launcher",
+    "compression": "maximum",
+    "electronLanguages": [
+      "en-US",
+      "es",
+      "es-419"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "build/**/*",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "build/*.jar"
+    ],
+    "publish": {
+      "provider": "github",
+      "owner": "EricCGO",
+      "repo": "eryon-launcher-releases",
+      "releaseType": "release"
+    },
+    "asar": true,
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "artifactName": "Eryon-Launcher-${version}-Setup.${ext}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Eryon Launcher",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico"
+    },
+    "portable": {
+      "artifactName": "Eryon-Launcher-${version}-Portable.${ext}"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Game"
+    }
+  }
+}

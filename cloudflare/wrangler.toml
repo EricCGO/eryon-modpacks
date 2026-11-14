@@ -1,0 +1,3 @@
+name = "eryon-curseforge-proxy"
+main = "curseforge-proxy.js"
+compatibility_date = "2026-11-12"

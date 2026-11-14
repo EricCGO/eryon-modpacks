@@ -1,0 +1,760 @@
+
+/* =====================================================
+   SATELITE — VENTANA FLOTANTE DE AMIGOS Y MENSAJES
+===================================================== */
+
+.sat-panel {
+  position: fixed;
+  z-index: 600;
+  top: 84px;
+  right: 260px;
+
+  display: flex;
+  flex-direction: column;
+
+  width: min(720px, calc(100vw - 40px));
+  height: min(560px, calc(100vh - 108px));
+
+  overflow: hidden;
+
+  border: 1px solid #3b5940;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    165deg,
+    rgba(16, 26, 18, 0.985),
+    rgba(8, 13, 9, 0.985)
+  );
+
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(85, 214, 107, 0.05);
+
+  animation: sat-enter 200ms ease both;
+}
+
+.sat-panel > * {
+  min-height: 0;
+}
+
+@keyframes sat-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =====================================================
+   CABECERA
+===================================================== */
+
+.sat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 12px 14px;
+
+  border-bottom: 1px solid #2c3d2f;
+
+  background: rgba(10, 17, 11, 0.9);
+
+  cursor: grab;
+  user-select: none;
+}
+
+.sat-header:active {
+  cursor: grabbing;
+}
+
+.sat-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #f0f8f1;
+}
+
+.sat-logo {
+  display: grid;
+  width: 26px;
+  height: 26px;
+
+  place-items: center;
+
+  border: 1px solid rgba(139, 255, 153, 0.35);
+  border-radius: 7px;
+
+  background: linear-gradient(145deg, #67e97b, #21863a);
+  color: #071009;
+
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.sat-title strong {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.sat-connection {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+  background: #5c6f61;
+}
+
+.sat-connection.ok {
+  background: var(--red);
+
+  box-shadow: 0 0 10px rgba(85, 214, 107, 0.5);
+}
+
+.sat-icon-button {
+  display: grid;
+  width: 30px;
+  height: 30px;
+
+  place-items: center;
+
+  border: 1px solid #394b3d;
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.03);
+  color: #d9e7dc;
+
+  font-size: 17px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.sat-icon-button:hover {
+  border-color: #65ce78;
+  background: rgba(85, 214, 107, 0.11);
+  color: #8ff39e;
+}
+
+/* =====================================================
+   CONEXIÓN PENDIENTE
+===================================================== */
+
+.sat-setup {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  padding: 26px 28px;
+}
+
+.sat-setup h3 {
+  margin: 3px 0 0;
+
+  color: #f0f8f1;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.sat-setup p {
+  margin: 0 0 9px;
+
+  color: #b9c6bb;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+/* =====================================================
+   PESTAÑAS
+===================================================== */
+
+.sat-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+
+  padding: 12px 14px 0;
+}
+
+.sat-tab {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid transparent;
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.028);
+  color: #9cae9f;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.sat-tab:hover {
+  color: #f2fbf3;
+}
+
+.sat-tab.active {
+  border-color: rgba(85, 214, 107, 0.35);
+
+  background: linear-gradient(
+    100deg,
+    rgba(85, 214, 107, 0.17),
+    rgba(85, 214, 107, 0.05)
+  );
+
+  color: #ffffff;
+}
+
+/* =====================================================
+   BURBUJAS DE CONTADOR / ESTADO
+===================================================== */
+
+.sat-badge {
+  display: inline-grid;
+  place-items: center;
+
+  min-width: 18px;
+  height: 18px;
+
+  padding: 0 5px;
+
+  border-radius: 999px;
+
+  background: rgba(85, 214, 107, 0.16);
+  color: #8bea99;
+
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.sat-badge.solid {
+  background: var(--red);
+  color: #06120a;
+}
+
+/* =====================================================
+   LISTA DE AMIGOS
+===================================================== */
+
+.sat-friends,
+.sat-chats {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 14px;
+
+  min-height: 0;
+  padding: 13px 14px 16px;
+
+  overflow-y: auto;
+}
+
+.sat-friends-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sat-add-form {
+  display: flex;
+  gap: 8px;
+}
+
+.sat-add-form .text-input,
+.sat-friends .text-input {
+  min-height: 40px;
+  padding: 8px 12px;
+
+  background: rgba(5, 10, 6, 0.6);
+}
+
+.sat-add-form .primary-button {
+  flex: 0 0 auto;
+
+  width: 40px;
+  min-height: 40px;
+
+  padding: 0;
+
+  border-radius: 8px;
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.sat-error {
+  margin: 0;
+  padding: 10px 12px;
+
+  border: 1px solid rgba(255, 100, 116, 0.34);
+  border-radius: 9px;
+
+  background: rgba(90, 25, 32, 0.22);
+  color: #ffacb3;
+
+  font-size: 10px;
+  line-height: 1.7;
+
+  overflow-wrap: anywhere;
+}
+
+.sat-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sat-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #a8b7aa;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+/* =====================================================
+   FILA DE AMIGO
+===================================================== */
+
+.sat-friend-row {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  min-width: 0;
+
+  width: 100%;
+
+  padding: 9px 11px;
+
+  border: 1px solid transparent;
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.022);
+
+  transition:
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+button.sat-friend-row {
+  border: 0;
+
+  color: inherit;
+  font: inherit;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+button.sat-friend-row:hover,
+.sat-friend-row:hover {
+  border-color: rgba(85, 214, 107, 0.28);
+  background: rgba(85, 214, 107, 0.065);
+}
+
+.sat-presence {
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  z-index: 1;
+
+  width: 9px;
+  height: 9px;
+
+  border: 2px solid rgba(10, 18, 11, 0.95);
+  border-radius: 50%;
+
+  background: #63736a;
+}
+
+.sat-presence.online {
+  background: var(--red);
+
+  box-shadow: 0 0 8px rgba(85, 214, 107, 0.55);
+}
+
+.sat-avatar {
+  display: grid;
+  flex: 0 0 auto;
+
+  place-items: center;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(85, 214, 107, 0.3);
+  border-radius: 8px;
+
+  background: #1c3020;
+  color: #8cf69a;
+
+  font-weight: 800;
+}
+
+.sat-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  image-rendering: pixelated;
+}
+
+.sat-friend-main {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  min-width: 0;
+  flex: 1;
+
+  padding: 0 4px 0 12px;
+  border: 0;
+
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.sat-friend-main strong {
+  overflow: hidden;
+
+  color: #eef6ef;
+
+  font-size: 12px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sat-friend-main span {
+  overflow: hidden;
+
+  color: #94a497;
+
+  font-size: 10px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sat-friend .sat-friend-main {
+  flex: 1;
+}
+
+.sat-friend-remove {
+  display: grid;
+  flex: 0 0 auto;
+
+  width: 26px;
+  height: 26px;
+
+  place-items: center;
+
+  border: 1px solid transparent;
+  border-radius: 7px;
+
+  background: transparent;
+  color: #7f8f82;
+
+  font-size: 15px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 160ms ease,
+    background 160ms ease;
+}
+
+.sat-friend-remove:hover {
+  border-color: rgba(240, 130, 130, 0.45);
+  background: rgba(74, 22, 24, 0.5);
+  color: #ffb0b8;
+}
+
+.sat-mini-button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 32px;
+
+  padding: 0 12px;
+
+  border: 1px solid #344438;
+  border-radius: 8px;
+
+  background: rgba(18, 31, 20, 0.92);
+  color: #dce8de;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.sat-mini-button:hover {
+  border-color: #579962;
+  color: #f4fff5;
+}
+
+.sat-mini-button.accept {
+  border-color: rgba(85, 214, 107, 0.55);
+
+  background: linear-gradient(135deg, #6be87e, #38bd52);
+  color: #071009;
+}
+
+.sat-mini-button.accept:hover {
+  background: linear-gradient(135deg, #88f697, #4edb65);
+}
+
+.sat-empty {
+  margin: 2px 2px 4px;
+
+  color: #8d9c90;
+
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.sat-hint {
+  margin: 0 2px 4px;
+
+  color: #7f9083;
+
+  font-size: 9px;
+  line-height: 1.8;
+}
+
+/* =====================================================
+   CHAT
+===================================================== */
+
+.sat-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 10px 14px;
+
+  border-bottom: 1px solid #2c3d2f;
+
+  background: rgba(10, 17, 11, 0.72);
+}
+
+.sat-chat-header strong {
+  color: #f0f8f1;
+
+  font-size: 13px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sat-chat-empty {
+  display: grid;
+
+  place-items: center;
+
+  padding: 30px 24px;
+}
+
+.sat-chat-empty p {
+  margin: 0;
+
+  color: #94a497;
+
+  font-size: 11px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.sat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  flex: 1;
+
+  padding: 14px;
+
+  overflow-y: auto;
+}
+
+.sat-messages .sat-empty {
+  text-align: center;
+  margin: auto 12px;
+}
+
+.sat-message {
+  display: flex;
+  justify-content: flex-start;
+
+  padding: 0 6px 0 40px;
+}
+
+.sat-message.mine {
+  justify-content: flex-end;
+
+  padding: 0 40px 0 6px;
+}
+
+.sat-bubble {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  max-width: min(420px, 78%);
+
+  padding: 9px 12px;
+
+  border-radius: 13px 13px 13px 4px;
+
+  background: rgba(255, 255, 255, 0.055);
+  color: #e4ede5;
+}
+
+.sat-message.mine .sat-bubble {
+  border-radius: 13px 13px 4px 13px;
+
+  background: linear-gradient(135deg, rgba(85, 214, 107, 0.23), rgba(85, 214, 107, 0.14));
+
+  border: 1px solid rgba(85, 214, 107, 0.3);
+}
+
+.sat-bubble p {
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.55;
+
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.sat-bubble .sat-time {
+  color: #87998b;
+
+  font-size: 8px;
+  letter-spacing: 0.4px;
+  text-align: right;
+}
+
+.sat-message.mine .sat-time {
+  color: #7ecb8c;
+}
+
+.sat-composer {
+  display: flex;
+  gap: 9px;
+
+  padding: 12px 14px;
+
+  border-top: 1px solid #2c3d2f;
+
+  background: rgba(10, 17, 11, 0.72);
+}
+
+.sat-composer .text-input {
+  min-height: 40px;
+  padding: 8px 12px;
+
+  background: rgba(5, 10, 6, 0.6);
+}
+
+.sat-send-button {
+  display: grid;
+  flex: 0 0 auto;
+
+  width: 40px;
+
+  place-items: center;
+
+  min-height: 40px;
+
+  border: 1px solid #5ce172;
+  border-radius: 9px;
+
+  background: linear-gradient(135deg, #6be87e, #38bd52);
+  color: #071009;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    filter 160ms ease,
+    transform 160ms ease;
+}
+
+.sat-send-button:hover:not(:disabled) {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+/* =====================================================
+   ADAPTACIÓN A PANTALLAS PEQUEÑAS
+===================================================== */
+
+@media (max-width: 900px) {
+  .sat-panel {
+    top: auto;
+    right: auto;
+
+    bottom: 12px;
+    left: 12px;
+
+    width: min(720px, calc(100vw - 24px));
+
+    height: min(560px, calc(100vh - 90px));
+  }
+}

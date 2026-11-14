@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "eryon_menu_helper",
+  "version": "${version}",
+  "name": "Eryon Menu Helper",
+  "description": "Agrega botones de Un jugador y Multijugador al menu de Sobrevive a Reviil sin alterar el mod.",
+  "environment": "client",
+  "mixins": [
+    {
+      "config": "menuhelper.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "1.21.1",
+    "java": ">=21"
+  }
+}
