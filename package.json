@@ -1,6 +1,6 @@
 {
   "name": "eryon-launcher",
-  "version": "1.3.18",
+  "version": "1.3.19",
   "private": true,
   "description": "Eryon Launcher - Minecraft con mods",
   "author": "Eryon",
@@ -93,6 +93,7 @@
       ]
     },
     "nsis": {
+      "include": "build/installer.nsh",
       "artifactName": "Eryon-Launcher-${version}-Setup.${ext}",
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
