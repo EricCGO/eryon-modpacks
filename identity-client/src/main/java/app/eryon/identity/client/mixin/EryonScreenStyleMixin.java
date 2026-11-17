@@ -15,7 +15,6 @@ import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
-import net.fabricmc.loader.api.FabricLoader;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,21 +30,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Screen.class)
 public abstract class EryonScreenStyleMixin {
 
-    /**
-     * En instancias de modpack (con FancyMenu o el mod del evento de
-     * DEDsafio instalado) el menú principal lo gestionan esos mods:
-     * Eryon se aparta y se muestra el menú normal de Minecraft.
-     * La propiedad -Deryon.titleScreen=on lo fuerza de vuelta.
-     */
-    @Unique
-    private static boolean eryon$modpackConMenuPropio() {
-        if ("on".equals(System.getProperty("eryon.titleScreen"))) {
-            return false;
-        }
-        FabricLoader loader = FabricLoader.getInstance();
-        return loader.isModLoaded("fancymenu") || loader.isModLoaded("ruleta");
-    }
-
     @Unique
     private int eryon$ancho;
 
@@ -54,7 +38,6 @@ public abstract class EryonScreenStyleMixin {
 
     @Inject(method = "init", at = @At("TAIL"))
     private void eryon$reemplazarBotones(MinecraftClient client, int width, int height, CallbackInfo ci) {
-        if (eryon$modpackConMenuPropio()) return;
         if (!(((Object) this) instanceof TitleScreen)) return;
         this.eryon$ancho = width;
         this.eryon$alto = height;
@@ -96,7 +79,6 @@ public abstract class EryonScreenStyleMixin {
 
     @Inject(method = "render", at = @At("TAIL"))
     private void eryon$dibujarEstilo(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        if (eryon$modpackConMenuPropio()) return;
         if (!(((Object) this) instanceof TitleScreen)) return;
 
         EryonTitleStyle.dibujarFondo(context, this.eryon$ancho, this.eryon$alto);
