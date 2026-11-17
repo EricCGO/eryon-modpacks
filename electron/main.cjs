@@ -275,29 +275,6 @@ function userDataPath(filename) {
   return path.join(app.getPath("userData"), filename);
 }
 
-/**
- * True si la instancia pertenece a un evento gestionado por el
- * instalador de eventos (sus archivos se verifican por hash y se
- * restauran desde el manifiesto en cada preparaci├│n).
- */
-function isEventManagedInstance(instanceId) {
-  if (!instanceId) return false;
-  try {
-    const data = JSON.parse(
-      require("node:fs").readFileSync(
-        userDataPath("eryon-event-instances.json"),
-        "utf8"
-      )
-    );
-    const events = data?.events || {};
-    return Object.values(events).some(
-      (entry) => entry && entry.instanceId === instanceId
-    );
-  } catch {
-    return false;
-  }
-}
-
 async function getBadgePresenceUrl() {
   let savedConfig = null;
   try {
@@ -3499,34 +3476,6 @@ async function launchMinecraft(
           logFiles.launcherLog,
           `No se pudo desactivar el aviso de inventario: ${redactSensitiveData(
             hintError?.message || hintError
-          )}`
-        );
-      }
-    }
-
-    // ==================================================
-    // MARCAS DE AGUA "NAVITH LABS"
-    // ==================================================
-    // El mod DEDsafio4FanByNavithLabs pinta su logo encima del de
-    // Minecraft en el men├║ principal y en la pantalla de carga.
-    // Se quitan sus mixins de marca antes de lanzar. En instancias
-    // de eventos no se toca: el instalador de eventos verifica cada
-    // archivo por hash y volver├¡a a descargar el jar original.
-    if (instance && !isEventManagedInstance(instance.id)) {
-      try {
-        const { cleanNavithWatermarks } = require("./navith-clean.cjs");
-        const jarsLimpios = await cleanNavithWatermarks(gameDirectory);
-        for (const jar of jarsLimpios) {
-          await appendDiagnosticLog(
-            logFiles.launcherLog,
-            `Se quitaron las marcas de agua de ${jar}.`
-          );
-        }
-      } catch (navithError) {
-        await appendDiagnosticLog(
-          logFiles.launcherLog,
-          `No se pudo limpiar las marcas de agua: ${redactSensitiveData(
-            navithError?.message || navithError
           )}`
         );
       }
