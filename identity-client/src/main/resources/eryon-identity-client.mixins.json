@@ -5,8 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "PlayerListHudMixin",
-    "EntityRendererMixin",
-    "EryonScreenStyleMixin"
+    "EntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
